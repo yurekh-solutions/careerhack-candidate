@@ -12,15 +12,18 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
     
     # Database
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///candidate.db')
+    _db_url = os.environ.get('DATABASE_URL', 'sqlite:///candidate.db')
+    # Supabase requires SSL for external connections
+    if 'supabase.com' in _db_url and 'sslmode' not in _db_url:
+        _db_url += '?sslmode=require'
+    SQLALCHEMY_DATABASE_URI = _db_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # Connection pool settings
-    db_url = os.environ.get('DATABASE_URL', 'sqlite:///candidate.db')
-    if db_url.startswith('sqlite'):
+    if _db_url.startswith('sqlite'):
         # SQLite doesn't need pool settings
         pass
-    elif 'supabase.com' in db_url or 'pooler' in db_url:
+    elif 'supabase.com' in _db_url or 'pooler' in _db_url:
         # Supabase uses PgBouncer - use smaller pool
         SQLALCHEMY_ENGINE_OPTIONS = {
             'pool_size': 5,

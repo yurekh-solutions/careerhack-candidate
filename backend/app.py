@@ -65,9 +65,14 @@ def create_app(config_name=None):
     def internal_error(error):
         return jsonify({'error': 'Internal server error'}), 500
     
-    # Create database tables
+    # Create database tables (non-blocking - app starts even if DB is temporarily unreachable)
     with app.app_context():
-        db.create_all()
+        try:
+            db.create_all()
+            print("Database tables created successfully")
+        except Exception as e:
+            print(f"Warning: Could not create DB tables on startup: {e}")
+            print("Tables will be created on first successful request")
     
     return app
 
