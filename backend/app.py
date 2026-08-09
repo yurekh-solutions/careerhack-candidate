@@ -68,10 +68,19 @@ def create_app(config_name=None):
         # Don't interfere with API routes
         if path.startswith('api/'):
             return jsonify({'error': 'Not found'}), 404
-        # Try to serve the file, fallback to index.html for SPA routing
+        # Try exact file first (e.g. _next/static/...)
         file_path = os.path.join(frontend_dir, path)
         if os.path.exists(file_path) and os.path.isfile(file_path):
             return send_from_directory(frontend_dir, path)
+        # Try path.html (e.g. /login -> login.html)
+        html_path = os.path.join(frontend_dir, path + '.html')
+        if os.path.exists(html_path) and os.path.isfile(html_path):
+            return send_from_directory(frontend_dir, path + '.html')
+        # Try path/index.html (e.g. /dashboard -> dashboard/index.html)
+        index_path = os.path.join(frontend_dir, path, 'index.html')
+        if os.path.exists(index_path) and os.path.isfile(index_path):
+            return send_from_directory(frontend_dir, os.path.join(path, 'index.html'))
+        # Fallback to index.html for SPA routing
         return send_from_directory(frontend_dir, 'index.html')
     
     # Error handlers
