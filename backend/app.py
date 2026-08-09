@@ -2,7 +2,7 @@
 CareerHack Candidate App - Main Flask Application
 """
 import os
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory, request
 from flask_cors import CORS
 from flask_migrate import Migrate
 from config import config
@@ -56,10 +56,32 @@ def create_app(config_name=None):
             'version': '1.0.0'
         }), 200
     
+    # Serve frontend static files
+    frontend_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'frontend', 'out')
+    
+    @app.route('/')
+    def serve_frontend():
+        return send_from_directory(frontend_dir, 'index.html')
+    
+    @app.route('/<path:path>')
+    def serve_static(path):
+        # Don't interfere with API routes
+        if path.startswith('api/'):
+            return jsonify({'error': 'Not found'}), 404
+        # Try to serve the file, fallback to index.html for SPA routing
+        file_path = os.path.join(frontend_dir, path)
+        if os.path.exists(file_path) and os.path.isfile(file_path):
+            return send_from_directory(frontend_dir, path)
+        return send_from_directory(frontend_dir, 'index.html')
+    
     # Error handlers
     @app.errorhandler(404)
     def not_found(error):
-        return jsonify({'error': 'Not found'}), 404
+        # Check if it's an API request
+        if request.path.startswith('/api/'):
+            return jsonify({'error': 'Not found'}), 404
+        # Serve frontend for non-API 404s
+        return send_from_directory(frontend_dir, 'index.html')
     
     @app.errorhandler(500)
     def internal_error(error):
