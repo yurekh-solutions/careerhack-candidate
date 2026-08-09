@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CareerHack - Transform Your Career",
-  description: "AI-powered career tools: resume builder, interview practice, job tracker, and career assistant.",
+  title: "CareerHack - AI Career Tools",
+  description: "AI-powered career platform: resume builder, interview practice, job tracker, and career assistant.",
 };
 
 export default function RootLayout({
