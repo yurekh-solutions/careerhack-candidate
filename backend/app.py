@@ -71,17 +71,30 @@ def create_app(config_name=None):
         # Try exact file first (e.g. _next/static/...)
         file_path = os.path.join(frontend_dir, path)
         if os.path.exists(file_path) and os.path.isfile(file_path):
-            return send_from_directory(frontend_dir, path)
+            # Determine mimetype based on extension
+            ext = os.path.splitext(path)[1].lower()
+            mimetype_map = {
+                '.css': 'text/css',
+                '.js': 'application/javascript',
+                '.woff': 'font/woff',
+                '.woff2': 'font/woff2',
+                '.svg': 'image/svg+xml',
+                '.png': 'image/png',
+                '.jpg': 'image/jpeg',
+                '.ico': 'image/x-icon',
+            }
+            mimetype = mimetype_map.get(ext, 'application/octet-stream')
+            return send_from_directory(frontend_dir, path, mimetype=mimetype)
         # Try path.html (e.g. /login -> login.html)
         html_path = os.path.join(frontend_dir, path + '.html')
         if os.path.exists(html_path) and os.path.isfile(html_path):
-            return send_from_directory(frontend_dir, path + '.html')
+            return send_from_directory(frontend_dir, path + '.html', mimetype='text/html')
         # Try path/index.html (e.g. /dashboard -> dashboard/index.html)
         index_path = os.path.join(frontend_dir, path, 'index.html')
         if os.path.exists(index_path) and os.path.isfile(index_path):
-            return send_from_directory(frontend_dir, os.path.join(path, 'index.html'))
+            return send_from_directory(frontend_dir, os.path.join(path, 'index.html'), mimetype='text/html')
         # Fallback to index.html for SPA routing
-        return send_from_directory(frontend_dir, 'index.html')
+        return send_from_directory(frontend_dir, 'index.html', mimetype='text/html')
     
     # Error handlers
     @app.errorhandler(404)

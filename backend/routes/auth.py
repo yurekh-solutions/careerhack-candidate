@@ -20,80 +20,92 @@ def _send_welcome_async(email, name):
 @auth_bp.route('/register', methods=['POST'])
 def register():
     """Register a new candidate"""
-    data = request.get_json()
-    
-    # Validate required fields
-    email = data.get('email', '').strip().lower()
-    password = data.get('password', '')
-    name = data.get('name', '').strip()
-    
-    if not email or not password or not name:
-        return jsonify({'error': 'Email, password, and name are required'}), 400
-    
-    # Validate email format
-    if '@' not in email or '.' not in email:
-        return jsonify({'error': 'Invalid email format'}), 400
-    
-    # Validate password length
-    if len(password) < 6:
-        return jsonify({'error': 'Password must be at least 6 characters'}), 400
-    
-    # Check if email already exists
-    if Candidate.query.filter_by(email=email).first():
-        return jsonify({'error': 'Email already registered'}), 409
-    
-    # Create new candidate
-    candidate = Candidate(
-        email=email,
-        password_hash=hash_password(password),
-        name=name
-    )
-    
-    db.session.add(candidate)
-    db.session.commit()
-    
-    # Send welcome email (non-blocking)
-    _send_welcome_async(email, name)
-    
-    # Generate token
-    token = generate_token(candidate.id)
-    
-    return jsonify({
-        'message': 'Registration successful',
-        'token': token,
-        'candidate': candidate.to_dict()
-    }), 201
+    try:
+        data = request.get_json()
+        
+        # Validate required fields
+        email = data.get('email', '').strip().lower()
+        password = data.get('password', '')
+        name = data.get('name', '').strip()
+        
+        if not email or not password or not name:
+            return jsonify({'error': 'Email, password, and name are required'}), 400
+        
+        # Validate email format
+        if '@' not in email or '.' not in email:
+            return jsonify({'error': 'Invalid email format'}), 400
+        
+        # Validate password length
+        if len(password) < 6:
+            return jsonify({'error': 'Password must be at least 6 characters'}), 400
+        
+        # Check if email already exists
+        if Candidate.query.filter_by(email=email).first():
+            return jsonify({'error': 'Email already registered'}), 409
+        
+        # Create new candidate
+        candidate = Candidate(
+            email=email,
+            password_hash=hash_password(password),
+            name=name
+        )
+        
+        db.session.add(candidate)
+        db.session.commit()
+        
+        # Send welcome email (non-blocking)
+        _send_welcome_async(email, name)
+        
+        # Generate token
+        token = generate_token(candidate.id)
+        
+        return jsonify({
+            'message': 'Registration successful',
+            'token': token,
+            'candidate': candidate.to_dict()
+        }), 201
+    except Exception as e:
+        print(f"Registration error: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': f'Registration failed: {str(e)}'}), 500
 
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
     """Login a candidate"""
-    data = request.get_json()
-    
-    email = data.get('email', '').strip().lower()
-    password = data.get('password', '')
-    
-    if not email or not password:
-        return jsonify({'error': 'Email and password are required'}), 400
-    
-    # Find candidate by email
-    candidate = Candidate.query.filter_by(email=email).first()
-    
-    if not candidate:
-        return jsonify({'error': 'Invalid email or password'}), 401
-    
-    # Verify password
-    if not verify_password(password, candidate.password_hash):
-        return jsonify({'error': 'Invalid email or password'}), 401
-    
-    # Generate token
-    token = generate_token(candidate.id)
-    
-    return jsonify({
-        'message': 'Login successful',
-        'token': token,
-        'candidate': candidate.to_dict()
-    }), 200
+    try:
+        data = request.get_json()
+        
+        email = data.get('email', '').strip().lower()
+        password = data.get('password', '')
+        
+        if not email or not password:
+            return jsonify({'error': 'Email and password are required'}), 400
+        
+        # Find candidate by email
+        candidate = Candidate.query.filter_by(email=email).first()
+        
+        if not candidate:
+            return jsonify({'error': 'Invalid email or password'}), 401
+        
+        # Verify password
+        if not verify_password(password, candidate.password_hash):
+            return jsonify({'error': 'Invalid email or password'}), 401
+        
+        # Generate token
+        token = generate_token(candidate.id)
+        
+        return jsonify({
+            'message': 'Login successful',
+            'token': token,
+            'candidate': candidate.to_dict()
+        }), 200
+    except Exception as e:
+        print(f"Login error: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': f'Login failed: {str(e)}'}), 500
 
 
 @auth_bp.route('/me', methods=['GET'])
