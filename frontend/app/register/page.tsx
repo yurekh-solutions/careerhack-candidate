@@ -47,16 +47,17 @@ export default function RegisterPage() {
         <div className="w-full max-w-md">
           {/* Logo */}
           <div className="flex items-center gap-2 mb-8">
-            <div className="w-8 h-8 bg-[#1a1a2e] rounded-lg flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.63 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+            <div className="w-8 h-8 bg-[#1a1a2e] rounded-full flex items-center justify-center">
+              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
               </svg>
             </div>
             <span className="text-[#1a1a2e] text-lg font-bold">CareerHack</span>
+            <span className="bg-[#1a1a2e] text-white text-[10px] font-bold px-2 py-0.5 rounded">AI</span>
           </div>
 
-          <h1 className="text-2xl font-bold text-[#1a1a2e] mb-1">Create your account</h1>
-          <p className="text-[#6b7280] text-sm mb-6">Sign up to get started</p>
+          <h1 className="text-3xl font-bold text-[#1a1a2e] mb-2">Create your account</h1>
+          <p className="text-[#6b7280] text-sm mb-8">Sign up to get started</p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
@@ -69,30 +70,44 @@ export default function RegisterPage() {
               <label htmlFor="name" className="block text-sm font-medium text-[#374151] mb-1.5">
                 Full name
               </label>
-              <input
-                id="name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                className="w-full px-4 py-3 border border-[#d1d5db] rounded-lg focus:ring-2 focus:ring-[#1a1a2e] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm"
-                placeholder="Enter your full name"
-              />
+              <div className="relative">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9ca3af]">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="w-full pl-11 pr-4 py-3 border border-[#d1d5db] rounded-lg focus:ring-2 focus:ring-[#1a1a2e] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm"
+                  placeholder="Enter your full name"
+                />
+              </div>
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-[#374151] mb-1.5">
                 Email address
               </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full px-4 py-3 border border-[#d1d5db] rounded-lg focus:ring-2 focus:ring-[#1a1a2e] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm"
-                placeholder="you@example.com"
-              />
+              <div className="relative">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9ca3af]">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full pl-11 pr-4 py-3 border border-[#d1d5db] rounded-lg focus:ring-2 focus:ring-[#1a1a2e] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm"
+                  placeholder="you@example.com"
+                />
+              </div>
             </div>
 
             <div>
@@ -100,6 +115,11 @@ export default function RegisterPage() {
                 Password
               </label>
               <div className="relative">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9ca3af]">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </div>
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
@@ -107,7 +127,7 @@ export default function RegisterPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   minLength={6}
-                  className="w-full px-4 py-3 pr-12 border border-[#d1d5db] rounded-lg focus:ring-2 focus:ring-[#1a1a2e] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm"
+                  className="w-full pl-11 pr-12 py-3 border border-[#d1d5db] rounded-lg focus:ring-2 focus:ring-[#1a1a2e] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm"
                   placeholder="Create a password"
                 />
                 <button
@@ -135,6 +155,11 @@ export default function RegisterPage() {
                 Confirm password
               </label>
               <div className="relative">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9ca3af]">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </div>
                 <input
                   id="confirmPassword"
                   type={showConfirm ? 'text' : 'password'}
@@ -142,7 +167,7 @@ export default function RegisterPage() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                   minLength={6}
-                  className="w-full px-4 py-3 pr-12 border border-[#d1d5db] rounded-lg focus:ring-2 focus:ring-[#1a1a2e] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm"
+                  className="w-full pl-11 pr-12 py-3 border border-[#d1d5db] rounded-lg focus:ring-2 focus:ring-[#1a1a2e] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm"
                   placeholder="Confirm your password"
                 />
                 <button
@@ -182,27 +207,68 @@ export default function RegisterPage() {
             </button>
           </form>
 
+          <div className="mt-6 flex items-center gap-3">
+            <div className="flex-1 h-px bg-[#e5e7eb]"></div>
+            <span className="text-xs text-[#9ca3af]">Or continue with</span>
+            <div className="flex-1 h-px bg-[#e5e7eb]"></div>
+          </div>
+
           <p className="mt-6 text-center text-sm text-[#6b7280]">
             Already have an account?{' '}
             <Link href="/login" className="text-[#1a1a2e] font-semibold hover:underline">
-              Login here
+              Sign in here
             </Link>
           </p>
         </div>
       </div>
 
-      {/* Right Image Panel */}
+      {/* Right Illustration Panel */}
       <div className="hidden lg:flex lg:w-1/2 bg-[#f8f9fa] flex-col items-center justify-center p-12 relative overflow-hidden">
         <img 
-          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" 
-          alt="Join thousands of recruiters" 
-          className="w-full max-w-md rounded-2xl shadow-2xl"
+          src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&h=600&fit=crop" 
+          alt="Join thousands of candidates" 
+          className="w-full max-w-md rounded-2xl shadow-lg"
         />
-        <div className="mt-8 text-center">
-          <h2 className="text-2xl font-bold text-[#1a1a2e] mb-2">Join thousands of recruiters</h2>
-          <p className="text-[#6b7280] text-sm leading-relaxed">
-            Use AI to find the best candidates<br />and build great teams.
+        <div className="mt-8 text-center max-w-sm">
+          <h2 className="text-2xl font-bold text-[#1a1a2e] mb-2">Join thousands of candidates</h2>
+          <p className="text-[#6b7280] text-sm leading-relaxed mb-6">
+            Use AI tools to find better opportunities<br />and accelerate your career.
           </p>
+          <div className="space-y-4 text-left">
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 bg-[#1a1a2e]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-[#1a1a2e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-[#1a1a2e]">Smart Job Matches</p>
+                <p className="text-xs text-[#6b7280]">AI matches jobs that fit your skills.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 bg-[#1a1a2e]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-[#1a1a2e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-[#1a1a2e]">Resume Enhancement</p>
+                <p className="text-xs text-[#6b7280]">Improve your resume with AI suggestions.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 bg-[#1a1a2e]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-[#1a1a2e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-[#1a1a2e]">Interview Prep</p>
+                <p className="text-xs text-[#6b7280]">Practice with AI-powered mock interviews.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

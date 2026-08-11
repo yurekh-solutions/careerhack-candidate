@@ -39,18 +39,19 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           {/* Logo */}
           <div className="flex items-center gap-2 mb-8">
-            <div className="w-8 h-8 bg-[#1a1a2e] rounded-lg flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.63 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+            <div className="w-8 h-8 bg-[#1a1a2e] rounded-full flex items-center justify-center">
+              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
               </svg>
             </div>
             <span className="text-[#1a1a2e] text-lg font-bold">CareerHack</span>
+            <span className="bg-[#1a1a2e] text-white text-[10px] font-bold px-2 py-0.5 rounded">AI</span>
           </div>
 
-          <h1 className="text-2xl font-bold text-[#1a1a2e] mb-1">Welcome Back</h1>
-          <p className="text-[#6b7280] text-sm mb-6">Sign in to your account to continue</p>
+          <h1 className="text-3xl font-bold text-[#1a1a2e] mb-2">Welcome Back </h1>
+          <p className="text-[#6b7280] text-sm mb-8">Login to your account to continue</p>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
                 {error}
@@ -61,15 +62,22 @@ export default function LoginPage() {
               <label htmlFor="email" className="block text-sm font-medium text-[#374151] mb-1.5">
                 Email address
               </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full px-4 py-3 border border-[#d1d5db] rounded-lg focus:ring-2 focus:ring-[#1a1a2e] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm"
-                placeholder="you@example.com"
-              />
+              <div className="relative">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9ca3af]">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full pl-11 pr-4 py-3 border border-[#d1d5db] rounded-lg focus:ring-2 focus:ring-[#1a1a2e] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm"
+                  placeholder="you@example.com"
+                />
+              </div>
             </div>
 
             <div>
@@ -82,13 +90,18 @@ export default function LoginPage() {
                 </button>
               </div>
               <div className="relative">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9ca3af]">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </div>
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full px-4 py-3 pr-12 border border-[#d1d5db] rounded-lg focus:ring-2 focus:ring-[#1a1a2e] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm"
+                  className="w-full pl-11 pr-12 py-3 border border-[#d1d5db] rounded-lg focus:ring-2 focus:ring-[#1a1a2e] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm"
                   placeholder="Enter your password"
                 />
                 <button
@@ -128,6 +141,12 @@ export default function LoginPage() {
             </button>
           </form>
 
+          <div className="mt-6 flex items-center gap-3">
+            <div className="flex-1 h-px bg-[#e5e7eb]"></div>
+            <span className="text-xs text-[#9ca3af]">Or continue with</span>
+            <div className="flex-1 h-px bg-[#e5e7eb]"></div>
+          </div>
+
           <p className="mt-6 text-center text-sm text-[#6b7280]">
             Don&apos;t have an account?{' '}
             <Link href="/register" className="text-[#1a1a2e] font-semibold hover:underline">
@@ -137,12 +156,12 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Right Image Panel */}
+      {/* Right Illustration Panel */}
       <div className="hidden lg:flex lg:w-1/2 bg-[#f8f9fa] flex-col items-center justify-center p-12 relative overflow-hidden">
         <img 
           src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop" 
           alt="AI-Powered Hiring" 
-          className="w-full max-w-md rounded-2xl shadow-2xl"
+          className="w-full max-w-md rounded-2xl shadow-lg"
         />
         <div className="mt-8 text-center">
           <h2 className="text-2xl font-bold text-[#1a1a2e] mb-2">AI-Powered Hiring</h2>
