@@ -86,9 +86,9 @@ export default function InterviewPage() {
   if (report) {
     return (
       <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-4xl mx-auto">
-        <h1 className="text-2xl sm:text-3xl font-bold text-[#1e2a4a] mb-6">Interview Report</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#1a1a2e] mb-6">Interview Report</h1>
 
-        <div className="bg-white rounded-xl border border-[#e2e8f0] p-6 mb-6">
+        <div className="bg-white rounded-xl border border-[#f0f0f5] p-6 mb-6">
           <div className="text-center mb-6">
             <div className={`inline-flex items-center justify-center w-24 h-24 rounded-full text-3xl font-bold ${
               report.scores.overall >= 70 ? 'bg-[#f0fdf4] text-[#15803d]' :
@@ -100,19 +100,19 @@ export default function InterviewPage() {
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
             {Object.entries(report.scores).filter(([k]) => k !== 'overall').map(([key, val]) => (
-              <div key={key} className="bg-[#f9fafb] rounded-xl p-4 text-center">
+              <div key={key} className="bg-[#f8f8fc] rounded-xl p-4 text-center">
                 <p className="text-xs text-[#6b7280] capitalize mb-1">{key}</p>
-                <p className="text-xl font-bold text-[#1e2a4a]">{val as number}%</p>
+                <p className="text-xl font-bold text-[#1a1a2e]">{val as number}%</p>
               </div>
             ))}
           </div>
 
           <div className="space-y-3">
-            <h3 className="font-semibold text-[#1e2a4a]">Question Breakdown</h3>
+            <h3 className="font-semibold text-[#1a1a2e]">Question Breakdown</h3>
             {report.question_scores.map((qs: {question: string; score: number}, i: number) => (
-              <div key={i} className="bg-[#f9fafb] rounded-xl p-4">
+              <div key={i} className="bg-[#f8f8fc] rounded-xl p-4">
                 <div className="flex items-center justify-between mb-1">
-                  <p className="text-sm font-medium text-[#1e2a4a]">Q{i + 1}</p>
+                  <p className="text-sm font-medium text-[#1a1a2e]">Q{i + 1}</p>
                   <span className={`text-sm font-bold ${qs.score >= 70 ? 'text-[#15803d]' : qs.score >= 40 ? 'text-[#b45309]' : 'text-[#dc2626]'}`}>{qs.score}%</span>
                 </div>
                 <p className="text-xs text-[#6b7280]">{qs.question}</p>
@@ -132,22 +132,22 @@ export default function InterviewPage() {
     return (
       <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-[#1e2a4a]">Interview Practice</h1>
+          <h1 className="text-2xl font-bold text-[#1a1a2e]">Interview Practice</h1>
           <span className="text-sm text-[#6b7280]">Question {currentQ + 1} of {session.questions.length}</span>
         </div>
 
-        <div className="w-full bg-[#eef1f5] rounded-full h-2 mb-6">
+        <div className="w-full bg-[#f0f0f5] rounded-full h-2 mb-6">
           <div className="bg-[#4f6ef7] h-2 rounded-full transition-all" style={{ width: `${((currentQ + 1) / session.questions.length) * 100}%` }} />
         </div>
 
-        <div className="bg-white rounded-xl border border-[#e2e8f0] p-6 mb-6">
+        <div className="bg-white rounded-xl border border-[#f0f0f5] p-6 mb-6">
           <p className="text-xs text-[#4f6ef7] font-semibold uppercase tracking-wide mb-2">Question {currentQ + 1}</p>
-          <h2 className="text-lg font-semibold text-[#1e2a4a] mb-4">{session.questions[currentQ]}</h2>
+          <h2 className="text-lg font-semibold text-[#1a1a2e] mb-4">{session.questions[currentQ]}</h2>
           <textarea
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
             rows={8}
-            className="w-full px-4 py-3 border border-[#e2e8f0] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] focus:border-transparent text-sm bg-white text-[#1e2a4a] placeholder-[#9ca3af]"
+            className="w-full px-4 py-3 border border-[#f0f0f5] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] focus:border-transparent text-sm bg-white text-[#1a1a2e] placeholder-[#9ca3af]"
             placeholder="Type your answer here..."
           />
         </div>
@@ -169,21 +169,21 @@ export default function InterviewPage() {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-4xl mx-auto">
-      <h1 className="text-2xl sm:text-3xl font-bold text-[#1e2a4a] mb-2">Interview Arena</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold text-[#1a1a2e] mb-2">Interview Arena</h1>
       <p className="text-[#6b7280] mb-8">Practice with AI-generated interview questions</p>
 
       {error && <div className="bg-[#fef2f2] border border-[#fecaca] text-[#dc2626] px-4 py-3 rounded-xl mb-6 text-sm">{error}</div>}
 
-      <div className="bg-white rounded-xl border border-[#e2e8f0] p-6 mb-8">
-        <h2 className="text-lg font-semibold text-[#1e2a4a] mb-4">Start New Session</h2>
+      <div className="bg-white rounded-xl border border-[#f0f0f5] p-6 mb-8">
+        <h2 className="text-lg font-semibold text-[#1a1a2e] mb-4">Start New Session</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-[#1e2a4a] mb-2">Role</label>
-            <input type="text" value={role} onChange={(e) => setRole(e.target.value)} className="w-full px-4 py-2.5 border border-[#e2e8f0] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] text-sm bg-white text-[#1e2a4a]" />
+            <label className="block text-sm font-medium text-[#1a1a2e] mb-2">Role</label>
+            <input type="text" value={role} onChange={(e) => setRole(e.target.value)} className="w-full px-4 py-2.5 border border-[#f0f0f5] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] text-sm bg-white text-[#1a1a2e]" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#1e2a4a] mb-2">Difficulty</label>
-            <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)} className="w-full px-4 py-2.5 border border-[#e2e8f0] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] text-sm bg-white text-[#1e2a4a]">
+            <label className="block text-sm font-medium text-[#1a1a2e] mb-2">Difficulty</label>
+            <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)} className="w-full px-4 py-2.5 border border-[#f0f0f5] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] text-sm bg-white text-[#1a1a2e]">
               <option value="easy">Easy</option>
               <option value="medium">Medium</option>
               <option value="hard">Hard</option>
@@ -199,12 +199,12 @@ export default function InterviewPage() {
 
       {history.length > 0 && (
         <div>
-          <h2 className="text-lg font-semibold text-[#1e2a4a] mb-4">Interview History</h2>
+          <h2 className="text-lg font-semibold text-[#1a1a2e] mb-4">Interview History</h2>
           <div className="space-y-3">
             {history.map((h) => (
-              <div key={h.id} className="bg-white rounded-xl border border-[#e2e8f0] p-4 flex items-center justify-between">
+              <div key={h.id} className="bg-white rounded-xl border border-[#f0f0f5] p-4 flex items-center justify-between">
                 <div>
-                  <p className="font-medium text-[#1e2a4a] text-sm">{h.role}</p>
+                  <p className="font-medium text-[#1a1a2e] text-sm">{h.role}</p>
                   <p className="text-xs text-[#6b7280]">{h.difficulty} | {new Date(h.interview_date).toLocaleDateString()}</p>
                 </div>
                 <span className={`text-sm font-bold px-3 py-1 rounded-lg ${

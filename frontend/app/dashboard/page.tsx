@@ -125,7 +125,7 @@ export default function DashboardPage() {
       {/* Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {stats.map((stat) => (
-          <div key={stat.label} className="bg-white rounded-xl border border-gray-100 p-4 sm:p-5">
+          <div key={stat.label} className="bg-white rounded-xl border border-[#f0f0f5] p-4 sm:p-5">
             <p className="text-xs text-gray-500 mb-1">{stat.label}</p>
             <div className="flex items-end justify-between">
               <p className="text-2xl sm:text-3xl font-bold text-[#1a1a2e]">{stat.value}</p>
@@ -142,8 +142,8 @@ export default function DashboardPage() {
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Applications */}
-        <div className="lg:col-span-2 bg-white rounded-xl border border-gray-100">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+        <div className="lg:col-span-2 bg-white rounded-xl border border-[#f0f0f5]">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-[#f0f0f5]">
             <h2 className="text-base font-semibold text-[#1a1a2e]">Recent Applications</h2>
             <Link href="/dashboard/tracker" className="text-xs text-[#4f6ef7] font-medium hover:underline">
               View all
@@ -157,7 +157,7 @@ export default function DashboardPage() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-gray-50">
+                  <tr className="border-b border-[#f5f5fa]">
                     <th className="text-left text-xs font-medium text-gray-400 px-5 py-3">Job</th>
                     <th className="text-left text-xs font-medium text-gray-400 px-5 py-3">Company</th>
                     <th className="text-left text-xs font-medium text-gray-400 px-5 py-3">Status</th>
@@ -166,7 +166,7 @@ export default function DashboardPage() {
                 </thead>
                 <tbody>
                   {applications.map((app) => (
-                    <tr key={app.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50">
+                    <tr key={app.id} className="border-b border-[#f5f5fa] last:border-0 hover:bg-gray-50/50">
                       <td className="px-5 py-3.5">
                         <span className="text-sm font-medium text-[#1a1a2e]">{app.job_title}</span>
                       </td>
@@ -188,7 +188,7 @@ export default function DashboardPage() {
         {/* Right Column */}
         <div className="space-y-6">
           {/* Quick Actions */}
-          <div className="bg-white rounded-xl border border-gray-100 p-5">
+          <div className="bg-white rounded-xl border border-[#f0f0f5] p-5">
             <h2 className="text-base font-semibold text-[#1a1a2e] mb-4">Quick Actions</h2>
             <div className="space-y-3">
               <Link href="/dashboard/resume" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition group">
@@ -228,7 +228,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Profile Completion */}
-          <div className="bg-white rounded-xl border border-gray-100 p-5">
+          <div className="bg-white rounded-xl border border-[#f0f0f5] p-5">
             <h2 className="text-base font-semibold text-[#1a1a2e] mb-3">Profile Completion</h2>
             <div className="flex items-center gap-3 mb-3">
               <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">

@@ -109,12 +109,12 @@ export default function ProfilePage() {
     }
   };
 
-  const inputClass = "w-full px-4 py-3 border border-[#e2e8f0] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] focus:border-transparent transition bg-white text-[#1e2a4a] placeholder-[#9ca3af] text-sm";
-  const labelClass = "block text-sm font-medium text-[#1e2a4a] mb-2";
+  const inputClass = "w-full px-4 py-3 border border-[#f0f0f5] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm";
+  const labelClass = "block text-sm font-medium text-[#1a1a2e] mb-2";
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-4xl mx-auto">
-      <h1 className="text-2xl sm:text-3xl font-bold text-[#1e2a4a] mb-6 sm:mb-8">My Profile</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold text-[#1a1a2e] mb-6 sm:mb-8">My Profile</h1>
 
       {message && (
         <div className="bg-[#f0fdf4] border border-[#bbf7d0] text-[#15803d] px-4 py-3 rounded-xl mb-6 text-sm">
@@ -128,8 +128,8 @@ export default function ProfilePage() {
       )}
 
       {/* Personal Information */}
-      <div className="bg-white rounded-xl border border-[#e2e8f0] p-5 sm:p-6 mb-6">
-        <h2 className="text-lg font-semibold text-[#1e2a4a] mb-5">Personal Information</h2>
+      <div className="bg-white rounded-xl border border-[#f0f0f5] p-5 sm:p-6 mb-6">
+        <h2 className="text-lg font-semibold text-[#1a1a2e] mb-5">Personal Information</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className={labelClass}>Full Name</label>
@@ -137,7 +137,7 @@ export default function ProfilePage() {
           </div>
           <div>
             <label className={labelClass}>Email</label>
-            <input type="email" value={candidate?.email || ''} disabled className="w-full px-4 py-3 border border-[#e2e8f0] rounded-xl bg-[#f9fafb] text-[#9ca3af] text-sm" />
+            <input type="email" value={candidate?.email || ''} disabled className="w-full px-4 py-3 border border-[#f0f0f5] rounded-xl bg-[#f8f8fc] text-[#9ca3af] text-sm" />
           </div>
           <div>
             <label className={labelClass}>Phone</label>
@@ -174,15 +174,15 @@ export default function ProfilePage() {
       </div>
 
       {/* Education Section */}
-      <div className="bg-white rounded-xl border border-[#e2e8f0] p-5 sm:p-6 mb-6">
+      <div className="bg-white rounded-xl border border-[#f0f0f5] p-5 sm:p-6 mb-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-[#1e2a4a]">Education</h2>
+          <h2 className="text-lg font-semibold text-[#1a1a2e]">Education</h2>
           <button onClick={() => setShowEduForm(!showEduForm)} className="text-[#4f6ef7] hover:text-[#3b5de7] text-sm font-medium">
             {showEduForm ? 'Cancel' : '+ Add Education'}
           </button>
         </div>
         {showEduForm && (
-          <div className="border border-[#e2e8f0] rounded-xl p-4 mb-4 space-y-3">
+          <div className="border border-[#f0f0f5] rounded-xl p-4 mb-4 space-y-3">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <input type="text" placeholder="Institution" value={eduForm.institution} onChange={(e) => setEduForm({ ...eduForm, institution: e.target.value })} className={inputClass} />
               <input type="text" placeholder="Degree" value={eduForm.degree} onChange={(e) => setEduForm({ ...eduForm, degree: e.target.value })} className={inputClass} />
@@ -197,8 +197,8 @@ export default function ProfilePage() {
         {candidate?.education && candidate.education.length > 0 ? (
           <div className="space-y-3">
             {candidate.education.map((edu) => (
-              <div key={edu.id} className="border border-[#e2e8f0] rounded-xl p-4">
-                <h3 className="font-semibold text-[#1e2a4a]">{edu.degree} in {edu.field}</h3>
+              <div key={edu.id} className="border border-[#f0f0f5] rounded-xl p-4">
+                <h3 className="font-semibold text-[#1a1a2e]">{edu.degree} in {edu.field}</h3>
                 <p className="text-[#6b7280] text-sm">{edu.institution}</p>
                 <p className="text-[#9ca3af] text-xs mt-1">{edu.start_date} - {edu.end_date || 'Present'} {edu.grade && `| Grade: ${edu.grade}`}</p>
               </div>
@@ -210,15 +210,15 @@ export default function ProfilePage() {
       </div>
 
       {/* Experience Section */}
-      <div className="bg-white rounded-xl border border-[#e2e8f0] p-5 sm:p-6 mb-6">
+      <div className="bg-white rounded-xl border border-[#f0f0f5] p-5 sm:p-6 mb-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-[#1e2a4a]">Work Experience</h2>
+          <h2 className="text-lg font-semibold text-[#1a1a2e]">Work Experience</h2>
           <button onClick={() => setShowExpForm(!showExpForm)} className="text-[#4f6ef7] hover:text-[#3b5de7] text-sm font-medium">
             {showExpForm ? 'Cancel' : '+ Add Experience'}
           </button>
         </div>
         {showExpForm && (
-          <div className="border border-[#e2e8f0] rounded-xl p-4 mb-4 space-y-3">
+          <div className="border border-[#f0f0f5] rounded-xl p-4 mb-4 space-y-3">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <input type="text" placeholder="Company" value={expForm.company} onChange={(e) => setExpForm({ ...expForm, company: e.target.value })} className={inputClass} />
               <input type="text" placeholder="Role / Title" value={expForm.role} onChange={(e) => setExpForm({ ...expForm, role: e.target.value })} className={inputClass} />
@@ -233,8 +233,8 @@ export default function ProfilePage() {
         {candidate?.experience && candidate.experience.length > 0 ? (
           <div className="space-y-3">
             {candidate.experience.map((exp) => (
-              <div key={exp.id} className="border border-[#e2e8f0] rounded-xl p-4">
-                <h3 className="font-semibold text-[#1e2a4a]">{exp.role}</h3>
+              <div key={exp.id} className="border border-[#f0f0f5] rounded-xl p-4">
+                <h3 className="font-semibold text-[#1a1a2e]">{exp.role}</h3>
                 <p className="text-[#6b7280] text-sm">{exp.company}</p>
                 <p className="text-[#9ca3af] text-xs mt-1">{exp.start_date} - {exp.end_date || 'Present'}</p>
                 {exp.description && <p className="text-[#6b7280] text-sm mt-2">{exp.description}</p>}
@@ -248,15 +248,15 @@ export default function ProfilePage() {
       </div>
 
       {/* Skills Section */}
-      <div className="bg-white rounded-xl border border-[#e2e8f0] p-5 sm:p-6 mb-6">
+      <div className="bg-white rounded-xl border border-[#f0f0f5] p-5 sm:p-6 mb-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-[#1e2a4a]">Skills</h2>
+          <h2 className="text-lg font-semibold text-[#1a1a2e]">Skills</h2>
           <button onClick={() => setShowSkillForm(!showSkillForm)} className="text-[#4f6ef7] hover:text-[#3b5de7] text-sm font-medium">
             {showSkillForm ? 'Cancel' : '+ Add Skill'}
           </button>
         </div>
         {showSkillForm && (
-          <div className="border border-[#e2e8f0] rounded-xl p-4 mb-4 space-y-3">
+          <div className="border border-[#f0f0f5] rounded-xl p-4 mb-4 space-y-3">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <input type="text" placeholder="Skill name" value={skillForm.name} onChange={(e) => setSkillForm({ ...skillForm, name: e.target.value })} className={inputClass} />
               <select value={skillForm.category} onChange={(e) => setSkillForm({ ...skillForm, category: e.target.value })} className={inputClass}>
@@ -267,7 +267,7 @@ export default function ProfilePage() {
               <div className="flex items-center gap-2">
                 <label className="text-sm text-[#6b7280]">Level:</label>
                 <input type="range" min="1" max="5" value={skillForm.proficiency} onChange={(e) => setSkillForm({ ...skillForm, proficiency: parseInt(e.target.value) })} className="flex-1 accent-[#4f6ef7]" />
-                <span className="text-sm font-medium text-[#1e2a4a]">{skillForm.proficiency}/5</span>
+                <span className="text-sm font-medium text-[#1a1a2e]">{skillForm.proficiency}/5</span>
               </div>
             </div>
             <button onClick={handleAddSkill} className="bg-[#4f6ef7] hover:bg-[#3b5de7] text-white font-medium py-2 px-4 rounded-xl transition text-sm">Add Skill</button>

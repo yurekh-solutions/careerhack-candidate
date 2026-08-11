@@ -64,7 +64,7 @@ export default function JobsPage() {
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-6xl mx-auto">
       <div className="mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-[#1e2a4a]">Job Discovery</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#1a1a2e]">Job Discovery</h1>
         <p className="text-[#6b7280] mt-1">Find jobs matched to your skills and experience</p>
       </div>
 
@@ -72,21 +72,21 @@ export default function JobsPage() {
       {error && <div className="bg-[#fef2f2] border border-[#fecaca] text-[#dc2626] px-4 py-3 rounded-xl mb-6 text-sm">{error}</div>}
 
       {/* Search */}
-      <div className="bg-white rounded-xl border border-[#e2e8f0] p-4 mb-6">
+      <div className="bg-white rounded-xl border border-[#f0f0f5] p-4 mb-6">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <input
             type="text"
             placeholder="Search jobs, companies..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full px-4 py-2.5 border border-[#e2e8f0] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] focus:border-transparent text-sm bg-white text-[#1e2a4a] placeholder-[#9ca3af]"
+            className="w-full px-4 py-2.5 border border-[#f0f0f5] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] focus:border-transparent text-sm bg-white text-[#1a1a2e] placeholder-[#9ca3af]"
           />
           <input
             type="text"
             placeholder="Location..."
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            className="w-full px-4 py-2.5 border border-[#e2e8f0] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] focus:border-transparent text-sm bg-white text-[#1e2a4a] placeholder-[#9ca3af]"
+            className="w-full px-4 py-2.5 border border-[#f0f0f5] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] focus:border-transparent text-sm bg-white text-[#1a1a2e] placeholder-[#9ca3af]"
           />
           <button
             onClick={fetchJobs}
@@ -108,7 +108,7 @@ export default function JobsPage() {
               </svg>
             </div>
           ) : jobs.length === 0 ? (
-            <div className="bg-white rounded-xl border border-[#e2e8f0] p-8 text-center">
+            <div className="bg-white rounded-xl border border-[#f0f0f5] p-8 text-center">
               <p className="text-[#6b7280] text-sm">No jobs found</p>
               <p className="text-[#9ca3af] text-xs mt-1">Try adjusting your search</p>
             </div>
@@ -118,10 +118,10 @@ export default function JobsPage() {
                 key={job.id}
                 onClick={() => setSelectedJob(job)}
                 className={`bg-white rounded-xl border p-4 cursor-pointer transition ${
-                  selectedJob?.id === job.id ? 'border-[#4f6ef7] ring-2 ring-[#4f6ef7]/20' : 'border-[#e2e8f0] hover:border-[#4f6ef7]/30'
+                  selectedJob?.id === job.id ? 'border-[#4f6ef7] ring-2 ring-[#4f6ef7]/20' : 'border-[#f0f0f5] hover:border-[#4f6ef7]/30'
                 }`}
               >
-                <h3 className="font-semibold text-[#1e2a4a] text-sm">{job.title}</h3>
+                <h3 className="font-semibold text-[#1a1a2e] text-sm">{job.title}</h3>
                 <p className="text-[#4f6ef7] text-xs font-medium mt-1">{job.company}</p>
                 <div className="flex items-center gap-2 mt-2">
                   {job.location && <span className="text-[#9ca3af] text-xs">{job.location}</span>}
@@ -135,15 +135,15 @@ export default function JobsPage() {
         {/* Job Detail */}
         <div className="lg:col-span-2">
           {selectedJob ? (
-            <div className="bg-white rounded-xl border border-[#e2e8f0] p-5 sm:p-6">
+            <div className="bg-white rounded-xl border border-[#f0f0f5] p-5 sm:p-6">
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h2 className="text-xl font-bold text-[#1e2a4a]">{selectedJob.title}</h2>
+                  <h2 className="text-xl font-bold text-[#1a1a2e]">{selectedJob.title}</h2>
                   <p className="text-[#4f6ef7] font-medium">{selectedJob.company}</p>
                   <div className="flex flex-wrap gap-3 mt-2">
                     {selectedJob.location && <span className="text-sm text-[#6b7280]">{selectedJob.location}</span>}
                     {selectedJob.salary_min && <span className="text-sm text-[#6b7280]">{selectedJob.salary_min.toLocaleString()} - {selectedJob.salary_max?.toLocaleString()}</span>}
-                    {selectedJob.source && <span className="text-xs bg-[#eef1f8] text-[#4f6ef7] px-2 py-0.5 rounded-lg">{selectedJob.source}</span>}
+                    {selectedJob.source && <span className="text-xs bg-[#f0f0f5] text-[#4f6ef7] px-2 py-0.5 rounded-lg">{selectedJob.source}</span>}
                   </div>
                 </div>
                 <button
@@ -157,12 +157,12 @@ export default function JobsPage() {
 
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-sm font-semibold text-[#1e2a4a] mb-2">Description</h3>
+                  <h3 className="text-sm font-semibold text-[#1a1a2e] mb-2">Description</h3>
                   <p className="text-sm text-[#6b7280] leading-relaxed whitespace-pre-wrap">{selectedJob.description || 'No description available.'}</p>
                 </div>
                 {selectedJob.requirements && (
                   <div>
-                    <h3 className="text-sm font-semibold text-[#1e2a4a] mb-2">Requirements</h3>
+                    <h3 className="text-sm font-semibold text-[#1a1a2e] mb-2">Requirements</h3>
                     <p className="text-sm text-[#6b7280] leading-relaxed whitespace-pre-wrap">{selectedJob.requirements}</p>
                   </div>
                 )}
@@ -177,7 +177,7 @@ export default function JobsPage() {
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-xl border border-[#e2e8f0] p-12 text-center">
+            <div className="bg-white rounded-xl border border-[#f0f0f5] p-12 text-center">
               <p className="text-[#6b7280] font-medium">Select a job to view details</p>
             </div>
           )}

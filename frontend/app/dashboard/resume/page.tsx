@@ -86,7 +86,7 @@ export default function ResumePage() {
     <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-6xl mx-auto">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#1e2a4a]">Resume Studio</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#1a1a2e]">Resume Studio</h1>
           <p className="text-[#6b7280] mt-1">Upload, analyze, and improve your resume</p>
         </div>
         <label className="mt-4 sm:mt-0 inline-flex items-center gap-2 bg-[#4f6ef7] hover:bg-[#3b5de7] text-white font-semibold py-2.5 px-5 rounded-xl cursor-pointer transition shadow-sm shadow-[#4f6ef7]/25 text-sm">
@@ -104,9 +104,9 @@ export default function ResumePage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Resume List */}
         <div className="lg:col-span-1 space-y-3">
-          <h2 className="text-lg font-semibold text-[#1e2a4a] mb-3">Your Resumes</h2>
+          <h2 className="text-lg font-semibold text-[#1a1a2e] mb-3">Your Resumes</h2>
           {resumes.length === 0 ? (
-            <div className="bg-white rounded-xl border border-[#e2e8f0] p-8 text-center">
+            <div className="bg-white rounded-xl border border-[#f0f0f5] p-8 text-center">
               <svg className="w-12 h-12 text-[#cbd5e1] mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
@@ -119,11 +119,11 @@ export default function ResumePage() {
                 key={resume.id}
                 onClick={() => { setSelectedResume(resume); setAnalysis(null); }}
                 className={`bg-white rounded-xl border p-4 cursor-pointer transition ${
-                  selectedResume?.id === resume.id ? 'border-[#4f6ef7] ring-2 ring-[#4f6ef7]/20' : 'border-[#e2e8f0] hover:border-[#4f6ef7]/30'
+                  selectedResume?.id === resume.id ? 'border-[#4f6ef7] ring-2 ring-[#4f6ef7]/20' : 'border-[#f0f0f5] hover:border-[#4f6ef7]/30'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="font-semibold text-[#1e2a4a] text-sm truncate">{resume.title}</h3>
+                  <h3 className="font-semibold text-[#1a1a2e] text-sm truncate">{resume.title}</h3>
                   {resume.ats_score > 0 && (
                     <span className={`text-xs font-bold px-2 py-1 rounded-lg ${
                       resume.ats_score >= 70 ? 'bg-[#f0fdf4] text-[#15803d]' :
@@ -142,9 +142,9 @@ export default function ResumePage() {
         <div className="lg:col-span-2">
           {selectedResume ? (
             <div className="space-y-6">
-              <div className="bg-white rounded-xl border border-[#e2e8f0] p-5 sm:p-6">
+              <div className="bg-white rounded-xl border border-[#f0f0f5] p-5 sm:p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold text-[#1e2a4a]">{selectedResume.title}</h2>
+                  <h2 className="text-lg font-semibold text-[#1a1a2e]">{selectedResume.title}</h2>
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleAnalyze(selectedResume.id)}
@@ -163,11 +163,11 @@ export default function ResumePage() {
                 </div>
 
                 {selectedResume.content ? (
-                  <div className="bg-[#f9fafb] rounded-xl p-4 max-h-64 overflow-y-auto">
-                    <pre className="text-sm text-[#1e2a4a] whitespace-pre-wrap font-sans">{selectedResume.content}</pre>
+                  <div className="bg-[#f8f8fc] rounded-xl p-4 max-h-64 overflow-y-auto">
+                    <pre className="text-sm text-[#1a1a2e] whitespace-pre-wrap font-sans">{selectedResume.content}</pre>
                   </div>
                 ) : (
-                  <div className="bg-[#f9fafb] rounded-xl p-8 text-center">
+                  <div className="bg-[#f8f8fc] rounded-xl p-8 text-center">
                     <p className="text-[#6b7280] text-sm">No text content available</p>
                     <p className="text-[#9ca3af] text-xs mt-1">Upload a .txt file or add content manually</p>
                   </div>
@@ -175,10 +175,10 @@ export default function ResumePage() {
 
                 {selectedResume.keywords && selectedResume.keywords.length > 0 && (
                   <div className="mt-4">
-                    <p className="text-sm font-medium text-[#1e2a4a] mb-2">Keywords Found:</p>
+                    <p className="text-sm font-medium text-[#1a1a2e] mb-2">Keywords Found:</p>
                     <div className="flex flex-wrap gap-2">
                       {selectedResume.keywords.map((kw, i) => (
-                        <span key={i} className="bg-[#eef1f8] text-[#4f6ef7] text-xs px-2.5 py-1 rounded-lg border border-[#dbe4ff]">{kw}</span>
+                        <span key={i} className="bg-[#f0f0f5] text-[#4f6ef7] text-xs px-2.5 py-1 rounded-lg border border-[#dbe4ff]">{kw}</span>
                       ))}
                     </div>
                   </div>
@@ -187,8 +187,8 @@ export default function ResumePage() {
 
               {/* ATS Analysis Results */}
               {analysis && (
-                <div className="bg-white rounded-xl border border-[#e2e8f0] p-5 sm:p-6">
-                  <h3 className="text-lg font-semibold text-[#1e2a4a] mb-4">ATS Analysis Report</h3>
+                <div className="bg-white rounded-xl border border-[#f0f0f5] p-5 sm:p-6">
+                  <h3 className="text-lg font-semibold text-[#1a1a2e] mb-4">ATS Analysis Report</h3>
 
                   <div className="flex items-center gap-4 mb-6">
                     <div className={`w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold ${
@@ -197,7 +197,7 @@ export default function ResumePage() {
                       'bg-[#fef2f2] text-[#dc2626]'
                     }`}>{analysis.ats_score}</div>
                     <div>
-                      <p className="font-semibold text-[#1e2a4a]">ATS Score</p>
+                      <p className="font-semibold text-[#1a1a2e]">ATS Score</p>
                       <p className="text-sm text-[#6b7280]">{analysis.ats_score >= 70 ? 'Great resume!' : analysis.ats_score >= 40 ? 'Needs improvement' : 'Significant improvements needed'}</p>
                     </div>
                   </div>
@@ -211,15 +211,15 @@ export default function ResumePage() {
                           'bg-[#ef4444] text-white'
                         }`}>{check.status === 'pass' ? '✓' : check.status === 'warning' ? '!' : '✗'}</span>
                         <div>
-                          <p className="text-sm font-medium text-[#1e2a4a]">{check.item}</p>
+                          <p className="text-sm font-medium text-[#1a1a2e]">{check.item}</p>
                           <p className="text-xs text-[#6b7280]">{check.detail}</p>
                         </div>
                       </div>
                     ))}
                   </div>
 
-                  <div className="bg-[#eef1f8] rounded-xl p-4">
-                    <p className="text-sm font-semibold text-[#1e2a4a] mb-2">Suggestions:</p>
+                  <div className="bg-[#f0f0f5] rounded-xl p-4">
+                    <p className="text-sm font-semibold text-[#1a1a2e] mb-2">Suggestions:</p>
                     <ul className="space-y-1">
                       {analysis.suggestions.map((s: string, i: number) => (
                         <li key={i} className="text-sm text-[#6b7280] flex items-start gap-2">
@@ -232,7 +232,7 @@ export default function ResumePage() {
               )}
             </div>
           ) : (
-            <div className="bg-white rounded-xl border border-[#e2e8f0] p-12 text-center">
+            <div className="bg-white rounded-xl border border-[#f0f0f5] p-12 text-center">
               <svg className="w-16 h-16 text-[#cbd5e1] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
