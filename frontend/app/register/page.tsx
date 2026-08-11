@@ -223,20 +223,20 @@ export default function RegisterPage() {
       </div>
 
       {/* Right Illustration Panel */}
-      <div className="hidden lg:flex lg:w-1/2 bg-[#f8f9fa] flex-col items-center justify-center p-12 relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 bg-white flex-col items-center justify-center p-12 relative overflow-hidden">
         <img 
-          src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&h=600&fit=crop" 
+          src="https://cdni.iconscout.com/illustration/premium/thumb/woman-managing-social-media-5695691-4752710.png" 
           alt="Join thousands of candidates" 
-          className="w-full max-w-md rounded-2xl shadow-lg"
+          className="w-full max-w-md"
         />
         <div className="mt-8 text-center max-w-sm">
           <h2 className="text-2xl font-bold text-[#1a1a2e] mb-2">Join thousands of candidates</h2>
           <p className="text-[#6b7280] text-sm leading-relaxed mb-6">
             Use AI tools to find better opportunities<br />and accelerate your career.
           </p>
-          <div className="space-y-4 text-left">
+          <div className="space-y-5 text-left mt-6">
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 bg-[#1a1a2e]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-9 h-9 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <svg className="w-4 h-4 text-[#1a1a2e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
@@ -247,9 +247,9 @@ export default function RegisterPage() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 bg-[#1a1a2e]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-9 h-9 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <svg className="w-4 h-4 text-[#1a1a2e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                 </svg>
               </div>
               <div>
@@ -258,9 +258,9 @@ export default function RegisterPage() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 bg-[#1a1a2e]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-9 h-9 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <svg className="w-4 h-4 text-[#1a1a2e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
               <div>

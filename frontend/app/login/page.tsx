@@ -157,13 +157,13 @@ export default function LoginPage() {
       </div>
 
       {/* Right Illustration Panel */}
-      <div className="hidden lg:flex lg:w-1/2 bg-[#f8f9fa] flex-col items-center justify-center p-12 relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 bg-white flex-col items-center justify-center p-12 relative overflow-hidden">
         <img 
-          src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop" 
+          src="https://cdni.iconscout.com/illustration/premium/thumb/businessman-working-on-laptop-5695684-4752703.png" 
           alt="AI-Powered Hiring" 
-          className="w-full max-w-md rounded-2xl shadow-lg"
+          className="w-full max-w-md"
         />
-        <div className="mt-8 text-center">
+        <div className="mt-4 text-center">
           <h2 className="text-2xl font-bold text-[#1a1a2e] mb-2">AI-Powered Hiring</h2>
           <p className="text-[#6b7280] text-sm leading-relaxed">
             Smart screening. Better matches.<br />Faster hiring.
