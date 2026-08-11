@@ -110,7 +110,7 @@ export default function ProfilePage() {
   };
 
   const inputClass = "w-full px-4 py-3 border border-[#eef0f5] rounded-xl focus:ring-2 focus:ring-[#2d2d3f]/20 focus:border-[#2d2d3f] transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm";
-  const labelClass = "block text-sm font-medium text-[#1a1a2e] mb-2";
+  const labelClass = "block text-sm font-bold text-[#1a1a2e] mb-2 tracking-wide";
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-4xl mx-auto">
