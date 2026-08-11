@@ -164,6 +164,17 @@ Best regards,
 }
 
 
+@assistant_bp.route('', methods=['GET'])
+@token_required
+def get_assistant_history():
+    """Get chat history for current candidate"""
+    candidate = request.current_candidate
+    messages = AssistantMessage.query.filter_by(candidate_id=candidate.id).order_by(AssistantMessage.created_at.asc()).all()
+    return jsonify({
+        'messages': [m.to_dict() for m in messages]
+    }), 200
+
+
 @assistant_bp.route('/chat', methods=['POST'])
 @token_required
 def chat():

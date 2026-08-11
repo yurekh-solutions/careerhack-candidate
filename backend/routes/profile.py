@@ -9,6 +9,39 @@ from datetime import datetime
 profile_bp = Blueprint('profile', __name__, url_prefix='/api/profile')
 
 
+@profile_bp.route('/education', methods=['GET'])
+@token_required
+def get_education():
+    """Get all education entries for current candidate"""
+    candidate = request.current_candidate
+    db.session.refresh(candidate)
+    return jsonify({
+        'education': [e.to_dict() for e in candidate.education]
+    }), 200
+
+
+@profile_bp.route('/experience', methods=['GET'])
+@token_required
+def get_experience():
+    """Get all experience entries for current candidate"""
+    candidate = request.current_candidate
+    db.session.refresh(candidate)
+    return jsonify({
+        'experience': [e.to_dict() for e in candidate.experience]
+    }), 200
+
+
+@profile_bp.route('/skills', methods=['GET'])
+@token_required
+def get_skills():
+    """Get all skills for current candidate"""
+    candidate = request.current_candidate
+    db.session.refresh(candidate)
+    return jsonify({
+        'skills': [s.to_dict() for s in candidate.skills]
+    }), 200
+
+
 @profile_bp.route('/education', methods=['POST'])
 @token_required
 def add_education():
