@@ -223,11 +223,11 @@ export default function RegisterPage() {
       </div>
 
       {/* Right Illustration Panel */}
-      <div className="hidden lg:flex lg:w-1/2 bg-white flex-col items-center justify-center p-12 relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 bg-white flex-col items-center justify-center p-8 relative overflow-hidden">
         <img 
-          src="https://cdni.iconscout.com/illustration/premium/thumb/woman-managing-social-media-5695691-4752710.png" 
+          src="https://illustrations.popsy.co/amber/team-goals.svg" 
           alt="Join thousands of candidates" 
-          className="w-full max-w-md"
+          className="w-full max-w-sm"
         />
         <div className="mt-8 text-center max-w-sm">
           <h2 className="text-2xl font-bold text-[#1a1a2e] mb-2">Join thousands of candidates</h2>
