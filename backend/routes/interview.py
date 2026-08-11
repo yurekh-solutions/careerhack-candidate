@@ -57,11 +57,15 @@ QUESTION_BANK = {
 @token_required
 def get_interviews():
     """Get all interview sessions for current candidate"""
-    candidate = request.current_candidate
-    interviews = Interview.query.filter_by(candidate_id=candidate.id).order_by(Interview.interview_date.desc()).all()
-    return jsonify({
-        'interviews': [i.to_dict() for i in interviews]
-    }), 200
+    try:
+        candidate = request.current_candidate
+        interviews = Interview.query.filter_by(candidate_id=candidate.id).order_by(Interview.interview_date.desc()).all()
+        return jsonify({
+            'interviews': [i.to_dict() for i in interviews]
+        }), 200
+    except Exception as e:
+        print(f"Interview list error: {e}")
+        return jsonify({'interviews': [], 'error': str(e)}), 200
 
 
 @interview_bp.route('/start', methods=['POST'])
