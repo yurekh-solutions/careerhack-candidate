@@ -11,10 +11,10 @@ class Config:
     """Base configuration"""
     SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
     
-    # Database
+    # Database - SQLite by default (no external DB needed)
     _db_url = os.environ.get('DATABASE_URL', 'sqlite:///candidate.db')
     # Supabase requires SSL for external connections
-    if ('supabase.com' in _db_url or 'supabase.co' in _db_url) and 'sslmode' not in _db_url:
+    if _db_url.startswith('postgresql') and ('supabase.com' in _db_url or 'supabase.co' in _db_url) and 'sslmode' not in _db_url:
         _db_url += '?sslmode=require'
     SQLALCHEMY_DATABASE_URI = _db_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
