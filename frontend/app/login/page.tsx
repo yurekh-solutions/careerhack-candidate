@@ -48,7 +48,7 @@ export default function LoginPage() {
             <span className="bg-[#1a1a2e] text-white text-[10px] font-bold px-2 py-0.5 rounded">AI</span>
           </div>
 
-          <h1 className="text-3xl font-bold text-[#1a1a2e] mb-2">Welcome Back </h1>
+          <h1 className="text-3xl font-bold text-[#1a1a2e] mb-2">Welcome Back 👋</h1>
           <p className="text-[#6b7280] text-sm mb-8">Login to your account to continue</p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
