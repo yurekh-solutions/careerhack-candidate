@@ -159,7 +159,7 @@ export default function LoginPage() {
       {/* Right Illustration Panel */}
       <div className="hidden lg:flex lg:w-1/2 bg-white flex-col items-center justify-center p-8 relative overflow-hidden">
         <img 
-          src="https://illustrations.popsy.co/amber/developer-activity.svg" 
+          src="/boy.png" 
           alt="AI-Powered Hiring" 
           className="w-full max-w-sm"
         />

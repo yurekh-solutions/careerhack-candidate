@@ -225,7 +225,7 @@ export default function RegisterPage() {
       {/* Right Illustration Panel */}
       <div className="hidden lg:flex lg:w-1/2 bg-white flex-col items-center justify-center p-8 relative overflow-hidden">
         <img 
-          src="https://illustrations.popsy.co/amber/team-goals.svg" 
+          src="/girl.png" 
           alt="Join thousands of candidates" 
           className="w-full max-w-sm"
         />
