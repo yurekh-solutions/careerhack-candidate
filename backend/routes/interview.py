@@ -58,7 +58,7 @@ QUESTION_BANK = {
 def get_interviews():
     """Get all interview sessions for current candidate"""
     candidate = request.current_candidate
-    interviews = Interview.query.filter_by(candidate_id=candidate.id).order_by(Interview.created_at.desc()).all()
+    interviews = Interview.query.filter_by(candidate_id=candidate.id).order_by(Interview.interview_date.desc()).all()
     return jsonify({
         'interviews': [i.to_dict() for i in interviews]
     }), 200
