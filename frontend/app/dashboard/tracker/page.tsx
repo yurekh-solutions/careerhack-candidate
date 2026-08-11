@@ -22,6 +22,29 @@ const STATUS_COLORS: Record<string, string> = {
   hired: 'bg-[#f0fdf4] text-[#15803d]',
   rejected: 'bg-[#fef2f2] text-[#dc2626]',
 };
+const STATUS_BORDER: Record<string, string> = {
+  applied: 'border-l-[#4f6ef7]',
+  viewed: 'border-l-[#22c55e]',
+  shortlisted: 'border-l-[#eab308]',
+  interview: 'border-l-[#8b5cf6]',
+  offer: 'border-l-[#f97316]',
+  hired: 'border-l-[#22c55e]',
+  rejected: 'border-l-[#ef4444]',
+};
+
+// Mini progress ring
+function MiniRing({ value, color, size = 44 }: { value: number; color: string; size?: number }) {
+  const strokeWidth = 4;
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (value / 100) * circumference;
+  return (
+    <svg width={size} height={size} className="-rotate-90">
+      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#eef0f5" strokeWidth={strokeWidth} />
+      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke={color} strokeWidth={strokeWidth} strokeDasharray={circumference} strokeDashoffset={offset} strokeLinecap="round" className="transition-all duration-700" />
+    </svg>
+  );
+}
 
 export default function TrackerPage() {
   const [applications, setApplications] = useState<Application[]>([]);
@@ -82,9 +105,16 @@ export default function TrackerPage() {
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-6xl mx-auto">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#1a1a2e]">Application Tracker</h1>
-          <p className="text-[#6b7280] mt-1">Track all your job applications in one place</p>
+        <div className="flex items-center gap-3">
+          <div className="w-11 h-11 bg-gradient-to-br from-[#2d2d3f] to-[#1a1a2e] rounded-xl flex items-center justify-center shadow-sm">
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+          </div>
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#1a1a2e]">Application Tracker</h1>
+            <p className="text-[#6b7280] text-sm mt-0.5">Track all your job applications in one place</p>
+          </div>
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
@@ -99,21 +129,45 @@ export default function TrackerPage() {
       {/* Stats */}
       {stats && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
-          <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-4">
-            <p className="text-xs text-[#6b7280] font-medium">Total Applied</p>
-            <p className="text-2xl font-bold text-[#1a1a2e] mt-1">{stats.total_applications}</p>
+          <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-4 flex items-center gap-3">
+            <div className="relative">
+              <MiniRing value={100} color="#1a1a2e" />
+              <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-[#1a1a2e]">{stats.total_applications}</span>
+            </div>
+            <div>
+              <p className="text-xs text-[#6b7280] font-medium">Total</p>
+              <p className="text-sm font-bold text-[#1a1a2e]">Applied</p>
+            </div>
           </div>
-          <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-4">
-            <p className="text-xs text-[#6b7280] font-medium">Response Rate</p>
-            <p className="text-2xl font-bold text-[#4f6ef7] mt-1">{stats.response_rate}%</p>
+          <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-4 flex items-center gap-3">
+            <div className="relative">
+              <MiniRing value={stats.response_rate} color="#4f6ef7" />
+              <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-[#4f6ef7]">{stats.response_rate}%</span>
+            </div>
+            <div>
+              <p className="text-xs text-[#6b7280] font-medium">Response</p>
+              <p className="text-sm font-bold text-[#4f6ef7]">Rate</p>
+            </div>
           </div>
-          <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-4">
-            <p className="text-xs text-[#6b7280] font-medium">Interview Rate</p>
-            <p className="text-2xl font-bold text-[#8b5cf6] mt-1">{stats.interview_rate}%</p>
+          <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-4 flex items-center gap-3">
+            <div className="relative">
+              <MiniRing value={stats.interview_rate} color="#8b5cf6" />
+              <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-[#8b5cf6]">{stats.interview_rate}%</span>
+            </div>
+            <div>
+              <p className="text-xs text-[#6b7280] font-medium">Interview</p>
+              <p className="text-sm font-bold text-[#8b5cf6]">Rate</p>
+            </div>
           </div>
-          <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-4">
-            <p className="text-xs text-[#6b7280] font-medium">Offer Rate</p>
-            <p className="text-2xl font-bold text-[#22c55e] mt-1">{stats.offer_rate}%</p>
+          <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-4 flex items-center gap-3">
+            <div className="relative">
+              <MiniRing value={stats.offer_rate} color="#22c55e" />
+              <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-[#22c55e]">{stats.offer_rate}%</span>
+            </div>
+            <div>
+              <p className="text-xs text-[#6b7280] font-medium">Offer</p>
+              <p className="text-sm font-bold text-[#22c55e]">Rate</p>
+            </div>
           </div>
         </div>
       )}
@@ -151,7 +205,7 @@ export default function TrackerPage() {
       ) : (
         <div className="space-y-3">
           {applications.map((app) => (
-            <div key={app.id} className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-4 sm:p-5 hover:shadow-md transition-shadow">
+            <div key={app.id} className={`bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-4 sm:p-5 hover:shadow-md transition-all border-l-[3px] ${STATUS_BORDER[app.status] || 'border-l-gray-300'}`}>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-[#1a1a2e] text-sm sm:text-base">{app.job?.title || 'Unknown Role'}</h3>

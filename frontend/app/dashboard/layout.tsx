@@ -127,17 +127,19 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex bg-[#f4f5f9]">
       {/* Sidebar - Desktop */}
-      <aside className="hidden lg:flex flex-col w-[260px] bg-gradient-to-b from-[#1a1a2e] to-[#16162a] fixed inset-y-0 left-0 z-30 shadow-xl shadow-black/5">
+      <aside className="hidden lg:flex flex-col w-[260px] bg-gradient-to-b from-[#1a1a2e] via-[#1e1e35] to-[#16162a] fixed inset-y-0 left-0 z-30 shadow-2xl shadow-black/10">
+        {/* Decorative top accent */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-blue-500/30" />
         {/* Logo */}
-        <div className="flex items-center gap-2.5 px-6 py-6 border-b border-white/5">
-          <div className="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+        <div className="flex items-center gap-2.5 px-6 py-6 border-b border-white/[0.06]">
+          <div className="w-10 h-10 bg-gradient-to-br from-white/15 to-white/5 rounded-xl flex items-center justify-center flex-shrink-0 ring-1 ring-white/10">
             <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
             </svg>
           </div>
           <div className="flex items-baseline gap-1.5">
             <span className="text-white text-base font-bold tracking-tight">CareerHack</span>
-            <span className="bg-white/15 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">AI</span>
+            <span className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 text-[9px] font-bold px-1.5 py-0.5 rounded ring-1 ring-blue-400/20">AI</span>
           </div>
         </div>
 
@@ -165,15 +167,16 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
         </nav>
 
         {/* User Profile + Logout */}
-        <div className="px-3 py-4 border-t border-white/5">
-          <div className="flex items-center gap-3 px-3 py-2 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-white text-xs font-bold">
+        <div className="px-3 py-4 border-t border-white/[0.06]">
+          <div className="flex items-center gap-3 px-3 py-2.5 mb-2 rounded-xl bg-white/[0.03]">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center text-white text-sm font-bold ring-1 ring-white/10">
               {candidate.name?.charAt(0).toUpperCase() || 'U'}
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-white text-xs font-semibold truncate">{candidate.name || 'User'}</p>
               <p className="text-gray-500 text-[10px] truncate">{candidate.email || ''}</p>
             </div>
+            <div className="w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-emerald-400/20" />
           </div>
           <button
             onClick={handleLogout}
@@ -268,6 +271,8 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
 
       {/* Main Content */}
       <main className="flex-1 lg:ml-[260px] pt-14 lg:pt-0">
+        {/* Top accent bar */}
+        <div className="h-[2px] bg-gradient-to-r from-transparent via-[#2d2d3f]/10 to-transparent hidden lg:block" />
         {children}
       </main>
     </div>

@@ -22,6 +22,30 @@ interface TrackerStats {
   hired: number;
 }
 
+function getGreeting() {
+  const h = new Date().getHours();
+  if (h < 12) return 'Good morning';
+  if (h < 17) return 'Good afternoon';
+  return 'Good evening';
+}
+
+function getFormattedDate() {
+  return new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+// SVG Circular Progress component
+function CircularProgress({ value, size = 80, strokeWidth = 6, color = '#1a1a2e' }: { value: number; size?: number; strokeWidth?: number; color?: string }) {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (value / 100) * circumference;
+  return (
+    <svg width={size} height={size} className="-rotate-90">
+      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#eef0f5" strokeWidth={strokeWidth} />
+      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke={color} strokeWidth={strokeWidth} strokeDasharray={circumference} strokeDashoffset={offset} strokeLinecap="round" className="transition-all duration-1000 ease-out" />
+    </svg>
+  );
+}
+
 export default function DashboardPage() {
   const candidate = useAuthStore((state) => state.candidate);
   const [trackerStats, setTrackerStats] = useState<TrackerStats | null>(null);
@@ -79,15 +103,15 @@ export default function DashboardPage() {
   }
 
   const stats = trackerStats ? [
-    { label: 'Total Applications', value: trackerStats.total?.toString() || '0', icon: 'briefcase', color: 'bg-[#4f6ef7]' },
-    { label: 'Pending', value: trackerStats.pending?.toString() || '0', icon: 'clock', color: 'bg-[#f59e0b]' },
-    { label: 'Shortlisted', value: trackerStats.shortlisted?.toString() || '0', icon: 'check', color: 'bg-[#22c55e]' },
-    { label: 'Interviewing', value: trackerStats.interviewing?.toString() || '0', icon: 'chat', color: 'bg-[#8b5cf6]' },
+    { label: 'Total Applications', value: trackerStats.total?.toString() || '0', icon: 'briefcase', gradient: 'from-blue-500 to-blue-600', bg: 'bg-blue-50' },
+    { label: 'Pending Review', value: trackerStats.pending?.toString() || '0', icon: 'clock', gradient: 'from-amber-500 to-orange-500', bg: 'bg-amber-50' },
+    { label: 'Shortlisted', value: trackerStats.shortlisted?.toString() || '0', icon: 'check', gradient: 'from-emerald-500 to-green-500', bg: 'bg-emerald-50' },
+    { label: 'Interviewing', value: trackerStats.interviewing?.toString() || '0', icon: 'chat', gradient: 'from-violet-500 to-purple-500', bg: 'bg-violet-50' },
   ] : [
-    { label: 'Total Applications', value: '0', icon: 'briefcase', color: 'bg-[#4f6ef7]' },
-    { label: 'Pending', value: '0', icon: 'clock', color: 'bg-[#f59e0b]' },
-    { label: 'Shortlisted', value: '0', icon: 'check', color: 'bg-[#22c55e]' },
-    { label: 'Interviewing', value: '0', icon: 'chat', color: 'bg-[#8b5cf6]' },
+    { label: 'Total Applications', value: '0', icon: 'briefcase', gradient: 'from-blue-500 to-blue-600', bg: 'bg-blue-50' },
+    { label: 'Pending Review', value: '0', icon: 'clock', gradient: 'from-amber-500 to-orange-500', bg: 'bg-amber-50' },
+    { label: 'Shortlisted', value: '0', icon: 'check', gradient: 'from-emerald-500 to-green-500', bg: 'bg-emerald-50' },
+    { label: 'Interviewing', value: '0', icon: 'chat', gradient: 'from-violet-500 to-purple-500', bg: 'bg-violet-50' },
   ];
 
   const StatIcon = ({ type }: { type: string }) => {
@@ -101,48 +125,47 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-[#1a1a2e]">
-            Welcome back, {candidate?.name?.split(' ')[0] || 'User'}!
+          <p className="text-xs text-[#9ca3af] font-medium mb-1">{getFormattedDate()}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#1a1a2e]">
+            {getGreeting()}, {candidate?.name?.split(' ')[0] || 'User'}!
           </h1>
-          <p className="text-sm text-gray-500 mt-1">Here&apos;s what&apos;s happening with your career today.</p>
+          <p className="text-sm text-[#6b7280] mt-1">Here&apos;s your career dashboard at a glance.</p>
         </div>
         <div className="flex items-center gap-3 mt-4 sm:mt-0">
           <div className="relative">
             <input
               type="text"
-              placeholder="Search anything..."
-              className="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-[#1a1a2e] focus:border-transparent w-48 sm:w-64"
+              placeholder="Search..."
+              className="pl-9 pr-4 py-2.5 border border-[#eef0f5] rounded-xl text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-[#2d2d3f]/20 focus:border-[#2d2d3f] w-48 sm:w-56 transition"
             />
-            <svg className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-[#9ca3af] absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
-          <button className="w-9 h-9 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button className="w-10 h-10 rounded-xl border border-[#eef0f5] flex items-center justify-center text-[#6b7280] hover:bg-white hover:shadow-sm transition bg-white/80 backdrop-blur-sm relative">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
             </svg>
+            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-red-500 rounded-full ring-2 ring-white" />
           </button>
-          <div className="w-9 h-9 rounded-full bg-[#1a1a2e] flex items-center justify-center text-white text-xs font-semibold">
-            {candidate?.name?.charAt(0).toUpperCase() || 'U'}
-          </div>
         </div>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {stats.map((stat) => (
-          <div key={stat.label} className="bg-white rounded-2xl border border-[#eef0f5] p-5 shadow-sm hover:shadow-md transition-shadow duration-200">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs text-gray-500 font-medium">{stat.label}</p>
-              <div className={`w-9 h-9 ${stat.color} rounded-xl flex items-center justify-center shadow-sm`}>
+          <div key={stat.label} className="bg-white rounded-2xl border border-[#eef0f5] p-5 shadow-sm hover:shadow-md transition-all duration-200 group">
+            <div className="flex items-center justify-between mb-4">
+              <div className={`w-11 h-11 bg-gradient-to-br ${stat.gradient} rounded-xl flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform`}>
                 <StatIcon type={stat.icon} />
               </div>
             </div>
             <p className="text-3xl font-bold text-[#1a1a2e]">{stat.value}</p>
+            <p className="text-xs text-[#6b7280] font-medium mt-1">{stat.label}</p>
           </div>
         ))}
       </div>
@@ -152,9 +175,15 @@ export default function DashboardPage() {
         {/* Recent Applications */}
         <div className="lg:col-span-2 bg-white rounded-2xl border border-[#eef0f5] shadow-sm">
           <div className="flex items-center justify-between px-6 py-4 border-b border-[#f0f0f5]">
-            <h2 className="text-base font-semibold text-[#1a1a2e]">Recent Applications</h2>
-            <Link href="/dashboard/tracker" className="text-xs text-[#4f6ef7] font-semibold hover:underline hover:text-[#3b5de7] transition">
-              View all &rarr;
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-[#f4f5f9] rounded-lg flex items-center justify-center">
+                <svg className="w-4 h-4 text-[#2d2d3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+              </div>
+              <h2 className="text-base font-semibold text-[#1a1a2e]">Recent Applications</h2>
+            </div>
+            <Link href="/dashboard/tracker" className="text-xs text-[#2d2d3f] font-semibold hover:text-[#1a1a2e] transition flex items-center gap-1">
+              View all
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </Link>
           </div>
           {applications.length === 0 ? (
@@ -237,19 +266,25 @@ export default function DashboardPage() {
 
           {/* Profile Completion */}
           <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-5">
-            <h2 className="text-base font-semibold text-[#1a1a2e] mb-3">Profile Completion</h2>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-[#1a1a2e] rounded-full transition-all"
-                  style={{ width: `${candidate?.profile_completion || 0}%` }}
-                />
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 bg-[#f4f5f9] rounded-lg flex items-center justify-center">
+                <svg className="w-4 h-4 text-[#2d2d3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
               </div>
-              <span className="text-sm font-semibold text-[#1a1a2e]">{candidate?.profile_completion || 0}%</span>
+              <h2 className="text-base font-semibold text-[#1a1a2e]">Profile</h2>
             </div>
-            <Link href="/dashboard/profile" className="text-xs text-[#4f6ef7] font-medium hover:underline">
-              Complete your profile &rarr;
-            </Link>
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <CircularProgress value={candidate?.profile_completion || 0} size={72} strokeWidth={5} color="#2d2d3f" />
+                <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-[#1a1a2e]">{candidate?.profile_completion || 0}%</span>
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-medium text-[#1a1a2e]">{(candidate?.profile_completion || 0) >= 80 ? 'Almost there!' : (candidate?.profile_completion || 0) >= 50 ? 'Keep going!' : 'Complete your profile'}</p>
+                <p className="text-xs text-[#6b7280] mt-0.5">A complete profile gets you 3x more visibility</p>
+                <Link href="/dashboard/profile" className="text-xs text-[#2d2d3f] font-semibold hover:underline mt-2 inline-block">
+                  Edit profile &rarr;
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -45,12 +45,20 @@ export default function CandidatesPage() {
     <div className="p-4 sm:p-6 lg:p-8">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-[#1a1a2e]">Candidates</h1>
-          <p className="text-sm text-gray-500 mt-1">{filtered.length} candidates found</p>
+        <div className="flex items-center gap-3">
+          <div className="w-11 h-11 bg-gradient-to-br from-[#2d2d3f] to-[#1a1a2e] rounded-xl flex items-center justify-center shadow-sm">
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-[#1a1a2e]">Candidates</h1>
+            <p className="text-sm text-[#6b7280] mt-0.5">{filtered.length} candidates found</p>
+          </div>
         </div>
-        <button className="mt-3 sm:mt-0 bg-[#2d2d3f] text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-[#1a1a2e] transition shadow-sm">
-          + Add Candidate
+        <button className="mt-3 sm:mt-0 bg-[#2d2d3f] text-white text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#1a1a2e] transition shadow-sm flex items-center gap-2">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+          Add Candidate
         </button>
       </div>
 
@@ -116,6 +124,9 @@ export default function CandidatesPage() {
                   <td className="px-5 py-4 text-sm text-gray-600">{c.position}</td>
                   <td className="px-5 py-4">
                     <span className={`text-sm font-bold ${getMatchColor(c.match)}`}>{c.match}%</span>
+                    <div className="w-full bg-[#eef0f5] rounded-full h-1 mt-1">
+                      <div className={`h-1 rounded-full ${c.match >= 90 ? 'bg-green-500' : c.match >= 80 ? 'bg-blue-500' : 'bg-amber-500'}`} style={{ width: `${c.match}%` }} />
+                    </div>
                   </td>
                   <td className="px-5 py-4">
                     <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${getStatusColor(c.status)}`}>
