@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: careerhack-candidate
+    runtime: python
+    plan: free
+    buildCommand: |
+      cd frontend && npm install && npm run build && cd ..
+      pip install -r backend/requirements.txt
+    startCommand: cd backend && gunicorn app:app --workers 2 --timeout 180
+    healthCheckPath: /api/health
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: FRONTEND_URL
+        value: https://careerhack-candidate.onrender.com
+      - key: DATABASE_URL
+        value: sqlite:///candidate.db
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USERNAME
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
