@@ -109,7 +109,7 @@ export default function ProfilePage() {
     }
   };
 
-  const inputClass = "w-full px-4 py-3 border border-[#f0f0f5] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] focus:border-transparent transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm";
+  const inputClass = "w-full px-4 py-3 border border-[#eef0f5] rounded-xl focus:ring-2 focus:ring-[#2d2d3f]/20 focus:border-[#2d2d3f] transition bg-white text-[#1a1a2e] placeholder-[#9ca3af] text-sm";
   const labelClass = "block text-sm font-medium text-[#1a1a2e] mb-2";
 
   return (
@@ -128,7 +128,7 @@ export default function ProfilePage() {
       )}
 
       {/* Personal Information */}
-      <div className="bg-white rounded-xl border border-[#f0f0f5] p-5 sm:p-6 mb-6">
+      <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-5 sm:p-6 mb-6">
         <h2 className="text-lg font-semibold text-[#1a1a2e] mb-5">Personal Information</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -167,14 +167,14 @@ export default function ProfilePage() {
         <button
           onClick={handleSaveProfile}
           disabled={saving}
-          className="mt-5 bg-[#4f6ef7] hover:bg-[#3b5de7] text-white font-semibold py-2.5 px-6 rounded-xl transition disabled:opacity-50 text-sm shadow-sm shadow-[#4f6ef7]/25"
+          className="mt-5 bg-[#2d2d3f] hover:bg-[#1a1a2e] text-white font-semibold py-2.5 px-6 rounded-xl transition disabled:opacity-50 text-sm shadow-sm"
         >
           {saving ? 'Saving...' : 'Save Profile'}
         </button>
       </div>
 
       {/* Education Section */}
-      <div className="bg-white rounded-xl border border-[#f0f0f5] p-5 sm:p-6 mb-6">
+      <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-5 sm:p-6 mb-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-[#1a1a2e]">Education</h2>
           <button onClick={() => setShowEduForm(!showEduForm)} className="text-[#4f6ef7] hover:text-[#3b5de7] text-sm font-medium">
@@ -191,7 +191,7 @@ export default function ProfilePage() {
               <input type="date" value={eduForm.start_date} onChange={(e) => setEduForm({ ...eduForm, start_date: e.target.value })} className={inputClass} />
               <input type="date" value={eduForm.end_date} onChange={(e) => setEduForm({ ...eduForm, end_date: e.target.value })} className={inputClass} />
             </div>
-            <button onClick={handleAddEducation} className="bg-[#4f6ef7] hover:bg-[#3b5de7] text-white font-medium py-2 px-4 rounded-xl transition text-sm">Add Education</button>
+            <button onClick={handleAddEducation} className="bg-[#2d2d3f] hover:bg-[#1a1a2e] text-white font-medium py-2 px-4 rounded-xl transition text-sm">Add Education</button>
           </div>
         )}
         {candidate?.education && candidate.education.length > 0 ? (
@@ -210,7 +210,7 @@ export default function ProfilePage() {
       </div>
 
       {/* Experience Section */}
-      <div className="bg-white rounded-xl border border-[#f0f0f5] p-5 sm:p-6 mb-6">
+      <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-5 sm:p-6 mb-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-[#1a1a2e]">Work Experience</h2>
           <button onClick={() => setShowExpForm(!showExpForm)} className="text-[#4f6ef7] hover:text-[#3b5de7] text-sm font-medium">
@@ -227,7 +227,7 @@ export default function ProfilePage() {
             </div>
             <textarea placeholder="Description" value={expForm.description} onChange={(e) => setExpForm({ ...expForm, description: e.target.value })} rows={2} className={inputClass} />
             <textarea placeholder="Key Achievements" value={expForm.achievements} onChange={(e) => setExpForm({ ...expForm, achievements: e.target.value })} rows={2} className={inputClass} />
-            <button onClick={handleAddExperience} className="bg-[#4f6ef7] hover:bg-[#3b5de7] text-white font-medium py-2 px-4 rounded-xl transition text-sm">Add Experience</button>
+            <button onClick={handleAddExperience} className="bg-[#2d2d3f] hover:bg-[#1a1a2e] text-white font-medium py-2 px-4 rounded-xl transition text-sm">Add Experience</button>
           </div>
         )}
         {candidate?.experience && candidate.experience.length > 0 ? (
@@ -248,7 +248,7 @@ export default function ProfilePage() {
       </div>
 
       {/* Skills Section */}
-      <div className="bg-white rounded-xl border border-[#f0f0f5] p-5 sm:p-6 mb-6">
+      <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-5 sm:p-6 mb-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-[#1a1a2e]">Skills</h2>
           <button onClick={() => setShowSkillForm(!showSkillForm)} className="text-[#4f6ef7] hover:text-[#3b5de7] text-sm font-medium">
@@ -270,7 +270,7 @@ export default function ProfilePage() {
                 <span className="text-sm font-medium text-[#1a1a2e]">{skillForm.proficiency}/5</span>
               </div>
             </div>
-            <button onClick={handleAddSkill} className="bg-[#4f6ef7] hover:bg-[#3b5de7] text-white font-medium py-2 px-4 rounded-xl transition text-sm">Add Skill</button>
+            <button onClick={handleAddSkill} className="bg-[#2d2d3f] hover:bg-[#1a1a2e] text-white font-medium py-2 px-4 rounded-xl transition text-sm">Add Skill</button>
           </div>
         )}
         {candidate?.skills && candidate.skills.length > 0 ? (

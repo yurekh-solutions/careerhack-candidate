@@ -88,7 +88,7 @@ export default function InterviewPage() {
       <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-4xl mx-auto">
         <h1 className="text-2xl sm:text-3xl font-bold text-[#1a1a2e] mb-6">Interview Report</h1>
 
-        <div className="bg-white rounded-xl border border-[#f0f0f5] p-6 mb-6">
+        <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-6 mb-6">
           <div className="text-center mb-6">
             <div className={`inline-flex items-center justify-center w-24 h-24 rounded-full text-3xl font-bold ${
               report.scores.overall >= 70 ? 'bg-[#f0fdf4] text-[#15803d]' :
@@ -121,7 +121,7 @@ export default function InterviewPage() {
           </div>
         </div>
 
-        <button onClick={() => { setReport(null); setStarted(false); setSession(null); }} className="bg-[#4f6ef7] hover:bg-[#3b5de7] text-white font-semibold py-2.5 px-6 rounded-xl transition text-sm">
+        <button onClick={() => { setReport(null); setStarted(false); setSession(null); }} className="bg-[#2d2d3f] hover:bg-[#1a1a2e] text-white font-semibold py-2.5 px-6 rounded-xl transition text-sm">
           Start New Interview
         </button>
       </div>
@@ -136,25 +136,25 @@ export default function InterviewPage() {
           <span className="text-sm text-[#6b7280]">Question {currentQ + 1} of {session.questions.length}</span>
         </div>
 
-        <div className="w-full bg-[#f0f0f5] rounded-full h-2 mb-6">
-          <div className="bg-[#4f6ef7] h-2 rounded-full transition-all" style={{ width: `${((currentQ + 1) / session.questions.length) * 100}%` }} />
+        <div className="w-full bg-[#eef0f5] rounded-full h-2.5 mb-6">
+          <div className="bg-[#2d2d3f] h-2.5 rounded-full transition-all duration-300" style={{ width: `${((currentQ + 1) / session.questions.length) * 100}%` }} />
         </div>
 
-        <div className="bg-white rounded-xl border border-[#f0f0f5] p-6 mb-6">
-          <p className="text-xs text-[#4f6ef7] font-semibold uppercase tracking-wide mb-2">Question {currentQ + 1}</p>
+        <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-6 mb-6">
+          <p className="text-xs text-[#2d2d3f] font-semibold uppercase tracking-wide mb-2">Question {currentQ + 1}</p>
           <h2 className="text-lg font-semibold text-[#1a1a2e] mb-4">{session.questions[currentQ]}</h2>
           <textarea
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
             rows={8}
-            className="w-full px-4 py-3 border border-[#f0f0f5] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] focus:border-transparent text-sm bg-white text-[#1a1a2e] placeholder-[#9ca3af]"
+            className="w-full px-4 py-3 border border-[#eef0f5] rounded-xl focus:ring-2 focus:ring-[#2d2d3f]/20 focus:border-[#2d2d3f] text-sm bg-white text-[#1a1a2e] placeholder-[#9ca3af] transition"
             placeholder="Type your answer here..."
           />
         </div>
 
         <div className="flex gap-3">
           {currentQ < session.questions.length - 1 ? (
-            <button onClick={saveAnswer} className="bg-[#4f6ef7] hover:bg-[#3b5de7] text-white font-semibold py-2.5 px-6 rounded-xl transition text-sm">
+            <button onClick={saveAnswer} className="bg-[#2d2d3f] hover:bg-[#1a1a2e] text-white font-semibold py-2.5 px-6 rounded-xl transition text-sm">
               Next Question
             </button>
           ) : (
@@ -174,23 +174,23 @@ export default function InterviewPage() {
 
       {error && <div className="bg-[#fef2f2] border border-[#fecaca] text-[#dc2626] px-4 py-3 rounded-xl mb-6 text-sm">{error}</div>}
 
-      <div className="bg-white rounded-xl border border-[#f0f0f5] p-6 mb-8">
+      <div className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-6 mb-8">
         <h2 className="text-lg font-semibold text-[#1a1a2e] mb-4">Start New Session</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-[#1a1a2e] mb-2">Role</label>
-            <input type="text" value={role} onChange={(e) => setRole(e.target.value)} className="w-full px-4 py-2.5 border border-[#f0f0f5] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] text-sm bg-white text-[#1a1a2e]" />
+            <input type="text" value={role} onChange={(e) => setRole(e.target.value)} className="w-full px-4 py-2.5 border border-[#eef0f5] rounded-xl focus:ring-2 focus:ring-[#2d2d3f]/20 focus:border-[#2d2d3f] text-sm bg-white text-[#1a1a2e] transition" />
           </div>
           <div>
             <label className="block text-sm font-medium text-[#1a1a2e] mb-2">Difficulty</label>
-            <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)} className="w-full px-4 py-2.5 border border-[#f0f0f5] rounded-xl focus:ring-2 focus:ring-[#4f6ef7] text-sm bg-white text-[#1a1a2e]">
+            <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)} className="w-full px-4 py-2.5 border border-[#eef0f5] rounded-xl focus:ring-2 focus:ring-[#2d2d3f]/20 focus:border-[#2d2d3f] text-sm bg-white text-[#1a1a2e] transition">
               <option value="easy">Easy</option>
               <option value="medium">Medium</option>
               <option value="hard">Hard</option>
             </select>
           </div>
           <div className="flex items-end">
-            <button onClick={startInterview} disabled={loading} className="w-full bg-[#4f6ef7] hover:bg-[#3b5de7] text-white font-semibold py-2.5 rounded-xl transition text-sm disabled:opacity-50">
+            <button onClick={startInterview} disabled={loading} className="w-full bg-[#2d2d3f] hover:bg-[#1a1a2e] text-white font-semibold py-2.5 rounded-xl transition text-sm disabled:opacity-50">
               {loading ? 'Starting...' : 'Start Interview'}
             </button>
           </div>
@@ -202,7 +202,7 @@ export default function InterviewPage() {
           <h2 className="text-lg font-semibold text-[#1a1a2e] mb-4">Interview History</h2>
           <div className="space-y-3">
             {history.map((h) => (
-              <div key={h.id} className="bg-white rounded-xl border border-[#f0f0f5] p-4 flex items-center justify-between">
+              <div key={h.id} className="bg-white rounded-2xl border border-[#eef0f5] shadow-sm p-4 flex items-center justify-between hover:shadow-md transition-shadow">
                 <div>
                   <p className="font-medium text-[#1a1a2e] text-sm">{h.role}</p>
                   <p className="text-xs text-[#6b7280]">{h.difficulty} | {new Date(h.interview_date).toLocaleDateString()}</p>

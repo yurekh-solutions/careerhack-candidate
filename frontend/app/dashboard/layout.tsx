@@ -125,46 +125,59 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="min-h-screen flex bg-[#f9fafb]">
+    <div className="min-h-screen flex bg-[#f4f5f9]">
       {/* Sidebar - Desktop */}
-      <aside className="hidden lg:flex flex-col w-60 bg-[#1a1a2e] fixed inset-y-0 left-0 z-30">
+      <aside className="hidden lg:flex flex-col w-[260px] bg-gradient-to-b from-[#1a1a2e] to-[#16162a] fixed inset-y-0 left-0 z-30 shadow-xl shadow-black/5">
         {/* Logo */}
-        <div className="flex items-center gap-2.5 px-5 py-5">
-          <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
-            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+        <div className="flex items-center gap-2.5 px-6 py-6 border-b border-white/5">
+          <div className="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
             </svg>
           </div>
-          <span className="text-white text-base font-bold">CareerHack</span>
-          <span className="bg-white/20 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">AI</span>
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-white text-base font-bold tracking-tight">CareerHack</span>
+            <span className="bg-white/15 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">AI</span>
+          </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-3 py-2 space-y-0.5 overflow-y-auto">
+        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+          <p className="px-3.5 text-[10px] font-semibold text-gray-500 uppercase tracking-widest mb-2">Menu</p>
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200 ${
                   isActive
-                    ? 'bg-white/10 text-white'
-                    : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'
+                    ? 'bg-white/10 text-white shadow-sm shadow-black/10'
+                    : 'text-gray-400 hover:bg-white/[0.06] hover:text-gray-200'
                 }`}
               >
-                {item.icon}
+                <span className={isActive ? 'text-white' : ''}>{item.icon}</span>
                 {item.label}
+                {isActive && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-white/60" />}
               </Link>
             );
           })}
         </nav>
 
-        {/* Logout */}
-        <div className="px-3 py-4 border-t border-white/10">
+        {/* User Profile + Logout */}
+        <div className="px-3 py-4 border-t border-white/5">
+          <div className="flex items-center gap-3 px-3 py-2 mb-2">
+            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-white text-xs font-bold">
+              {candidate.name?.charAt(0).toUpperCase() || 'U'}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-white text-xs font-semibold truncate">{candidate.name || 'User'}</p>
+              <p className="text-gray-500 text-[10px] truncate">{candidate.email || ''}</p>
+            </div>
+          </div>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:bg-white/5 hover:text-gray-200 transition"
+            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[13px] font-medium text-gray-400 hover:bg-white/[0.06] hover:text-gray-200 transition"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -254,7 +267,7 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 lg:ml-60 pt-14 lg:pt-0">
+      <main className="flex-1 lg:ml-[260px] pt-14 lg:pt-0">
         {children}
       </main>
     </div>
