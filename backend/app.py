@@ -24,11 +24,25 @@ def create_app(config_name=None):
     db.init_app(app)
     migrate.init_app(app, db)
     
-    # Configure CORS
+    # Configure CORS - allow multiple origins (Vercel frontend, Render backend, localhost)
+    allowed_origins = [
+        'http://localhost:3000',
+        'http://127.0.0.1:3000',
+        'http://localhost:5000',
+        'http://127.0.0.1:5000',
+        'https://careerhack-candidate.vercel.app',
+        'https://careerhack-candidate.onrender.com',
+    ]
+    # Also allow the FRONTEND_URL from config if not already in list
+    config_origin = app.config.get('FRONTEND_URL', '')
+    if config_origin and config_origin not in allowed_origins:
+        allowed_origins.append(config_origin)
+    
     CORS(app, resources={r"/api/*": {
-        "origins": app.config['FRONTEND_URL'],
-        "methods": ["GET", "POST", "PUT", "DELETE"],
-        "allow_headers": ["Content-Type", "Authorization"]
+        "origins": allowed_origins,
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"],
+        "supports_credentials": True
     }})
     
     # Register blueprints
