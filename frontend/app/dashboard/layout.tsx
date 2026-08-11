@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuthStore } from '@/store/auth';
 import Link from 'next/link';
@@ -17,11 +17,11 @@ const navItems = [
     ),
   },
   {
-    href: '/dashboard/profile',
-    label: 'Profile',
+    href: '/dashboard/candidates',
+    label: 'Candidates',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
     ),
   },
@@ -70,6 +70,16 @@ const navItems = [
       </svg>
     ),
   },
+  {
+    href: '/dashboard/profile',
+    label: 'Settings',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+  },
 ];
 
 function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
@@ -79,13 +89,13 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
   const logout = useAuthStore((state) => state.logout);
   const loadFromStorage = useAuthStore((state) => state.loadFromStorage);
   const isLoading = useAuthStore((state) => state.isLoading);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     loadFromStorage();
   }, [loadFromStorage]);
 
   useEffect(() => {
-    // Only redirect if not loading AND not authenticated
     if (!isLoading && !candidate) {
       router.push('/login');
     }
@@ -93,9 +103,9 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
 
   if (!candidate && isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#eef1f5]">
+      <div className="min-h-screen flex items-center justify-center bg-[#f9fafb]">
         <div className="flex items-center gap-3 text-[#6b7280]">
-          <svg className="animate-spin h-5 w-5 text-[#4f6ef7]" viewBox="0 0 24 24">
+          <svg className="animate-spin h-5 w-5 text-[#1a1a2e]" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
           </svg>
@@ -115,31 +125,31 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="min-h-screen flex bg-[#eef1f5]">
-      {/* Sidebar */}
-      <aside className="hidden md:flex flex-col w-64 bg-[#1e2a4a] fixed inset-y-0 left-0 z-30">
+    <div className="min-h-screen flex bg-[#f9fafb]">
+      {/* Sidebar - Desktop */}
+      <aside className="hidden lg:flex flex-col w-60 bg-[#1a1a2e] fixed inset-y-0 left-0 z-30">
         {/* Logo */}
-        <div className="flex items-center gap-3 px-6 py-5 border-b border-white/10">
-          <div className="w-9 h-9 bg-[#4f6ef7] rounded-xl flex items-center justify-center flex-shrink-0">
-            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="flex items-center gap-2.5 px-5 py-5">
+          <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
-          <span className="text-white text-lg font-bold tracking-wide">CareerHack</span>
+          <span className="text-white text-base font-bold">CareerHack</span>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 px-3 py-2 space-y-0.5 overflow-y-auto">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   isActive
-                    ? 'bg-[#4f6ef7] text-white shadow-sm shadow-[#4f6ef7]/30'
-                    : 'text-blue-200 hover:bg-white/10 hover:text-white'
+                    ? 'bg-white/10 text-white'
+                    : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'
                 }`}
               >
                 {item.icon}
@@ -149,74 +159,99 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
           })}
         </nav>
 
-        {/* User Profile */}
-        <div className="px-4 py-4 border-t border-white/10">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-9 h-9 rounded-full bg-[#4f6ef7]/30 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
-              {candidate.name?.charAt(0).toUpperCase() || 'U'}
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-white text-sm font-medium truncate">{candidate.name || 'User'}</p>
-              <p className="text-blue-300 text-xs truncate">{candidate.email}</p>
-            </div>
-          </div>
+        {/* Logout */}
+        <div className="px-3 py-4 border-t border-white/10">
           <button
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-blue-200 hover:bg-white/10 hover:text-white transition"
+            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:bg-white/5 hover:text-gray-200 transition"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
-            Logout
+            Log out
           </button>
         </div>
       </aside>
 
       {/* Mobile Header */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-30 bg-white border-b border-[#e2e8f0] px-4 py-3">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-30 bg-white border-b border-gray-200 px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[#4f6ef7] rounded-lg flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-gray-600">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <div className="w-7 h-7 bg-[#1a1a2e] rounded-lg flex items-center justify-center ml-2">
+              <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className="text-[#1e2a4a] font-bold text-lg">CareerHack</span>
+            <span className="text-[#1a1a2e] font-bold text-base ml-1">CareerHack</span>
           </div>
-          <button
-            onClick={handleLogout}
-            className="text-[#6b7280] hover:text-[#1e2a4a] transition"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-3">
+            <button className="text-gray-500">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
+            <div className="w-8 h-8 rounded-full bg-[#1a1a2e] flex items-center justify-center text-white text-xs font-semibold">
+              {candidate.name?.charAt(0).toUpperCase() || 'U'}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Bottom Nav */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-[#e2e8f0] px-1 py-2">
-        <div className="flex justify-around">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`flex flex-col items-center justify-center gap-0.5 min-w-[44px] min-h-[44px] rounded-lg transition ${
-                  isActive ? 'text-[#4f6ef7]' : 'text-[#6b7280]'
-                }`}
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-40">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setMobileMenuOpen(false)} />
+          <div className="absolute left-0 top-0 bottom-0 w-60 bg-[#1a1a2e] p-3">
+            <div className="flex items-center gap-2 px-3 py-4 mb-2">
+              <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <span className="text-white font-bold">CareerHack</span>
+            </div>
+            <nav className="space-y-0.5">
+              {navItems.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                      isActive
+                        ? 'bg-white/10 text-white'
+                        : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'
+                    }`}
+                  >
+                    {item.icon}
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+            <div className="absolute bottom-0 left-0 right-0 p-3 border-t border-white/10">
+              <button
+                onClick={() => { handleLogout(); setMobileMenuOpen(false); }}
+                className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:bg-white/5 hover:text-gray-200 transition"
               >
-                {item.icon}
-                <span className="text-[9px] font-medium leading-tight">{item.label}</span>
-              </Link>
-            );
-          })}
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                Log out
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 pt-16 md:pt-0 pb-20 md:pb-0">
+      <main className="flex-1 lg:ml-60 pt-14 lg:pt-0">
         {children}
       </main>
     </div>
