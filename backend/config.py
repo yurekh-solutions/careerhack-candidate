@@ -14,7 +14,7 @@ class Config:
     # Database
     _db_url = os.environ.get('DATABASE_URL', 'sqlite:///candidate.db')
     # Supabase requires SSL for external connections
-    if 'supabase.com' in _db_url and 'sslmode' not in _db_url:
+    if ('supabase.com' in _db_url or 'supabase.co' in _db_url) and 'sslmode' not in _db_url:
         _db_url += '?sslmode=require'
     SQLALCHEMY_DATABASE_URI = _db_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
